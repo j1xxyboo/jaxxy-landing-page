@@ -1,23 +1,27 @@
 import Navbar from './sections/Navbar';
 import Hero from './sections/Hero';
+import Tools from './sections/Tools';
+import UseCases from './sections/UseCases';
+import Visual from './sections/Visual';
+import Reimagine from './sections/Reimagine';
 import Studio from './sections/Studio';
-import Models from './sections/Models';
-import Local from './sections/Local';
-import Pricing from './sections/Pricing';
+import Discovery from './sections/Discovery';
 import Footer from './sections/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-ink-950 py-6 sm:py-10">
-      <div className="mx-auto max-w-[1360px] overflow-hidden rounded-[28px] border border-white/[0.06] bg-ink-900 shadow-panel">
-        <Navbar />
+    <div className="min-h-screen bg-ink-950 text-white">
+      <Navbar />
+      <main>
         <Hero />
+        <Tools />
+        <UseCases />
+        <Visual />
+        <Reimagine />
         <Studio />
-        <Models />
-        <Local />
-        <Pricing />
-        <Footer />
-      </div>
+        <Discovery />
+      </main>
+      <Footer />
     </div>
   );
 }

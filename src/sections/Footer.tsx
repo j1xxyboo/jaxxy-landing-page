@@ -1,56 +1,40 @@
-import Logo from '../components/Logo';
-
-const COLUMNS = [
-  {
-    title: 'Produit',
-    links: ['Modèles', 'Studio', 'Galerie', 'Tarifs'],
-  },
-  {
-    title: 'Ressources',
-    links: ['Guide des prompts', 'Crédits et coûts', 'Statut du service'],
-  },
-  {
-    title: 'Société',
-    links: ['À propos', 'Contact', 'Conditions', 'Confidentialité'],
-  },
-];
-
 export default function Footer() {
+  const columns = ['Product', 'Company', 'Resources', 'Legal'];
   return (
-    <footer className="border-t border-white/[0.06] px-4 py-14 sm:px-6">
-      <div className="mx-auto max-w-5xl">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_2fr]">
+    <footer className="border-t border-white/[0.06] px-4 py-16 sm:px-6">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div>
-            <Logo />
-            <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-slate-500">
-              La plateforme IA créative d’Algérie. Générez images et vidéos avec les meilleurs
-              modèles, depuis un seul compte.
+            <div className="flex items-center gap-2.5">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
+              <span className="text-lg font-bold tracking-tight text-white">Logo</span>
+            </div>
+            <p className="mt-4 max-w-xs text-sm text-white/40">
+              Placeholder tagline goes here.
             </p>
           </div>
-
-          <div className="grid gap-8 sm:grid-cols-3">
-            {COLUMNS.map((column) => (
-              <div key={column.title}>
-                <p className="text-[12px] font-semibold uppercase tracking-wide text-slate-500">
-                  {column.title}
-                </p>
-                <ul className="mt-3 space-y-2">
-                  {column.links.map((link) => (
-                    <li key={link}>
-                      <a href="#top" className="text-[13px] text-slate-400 transition-colors hover:text-white">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {columns.map((col) => (
+            <div key={col}>
+              <h4 className="text-sm font-semibold text-white">{col}</h4>
+              <ul className="mt-4 space-y-2.5">
+                {[0, 1, 2, 3].map((i) => (
+                  <li key={i}>
+                    <a href="#" className="text-sm text-white/40 transition hover:text-white">
+                      Link item
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 sm:flex-row">
+          <p className="text-sm text-white/30">© 2026 Placeholder. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            {[0, 1, 2].map((i) => (
+              <a key={i} href="#" className="h-8 w-8 rounded-full border border-white/10 transition hover:bg-white/5" />
             ))}
           </div>
-        </div>
-
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/[0.06] pt-6 sm:flex-row sm:items-center">
-          <p className="text-[12px] text-slate-500">© 2026 Jaxxy. Alger, Algérie.</p>
-          <p className="text-[12px] text-slate-500">Paiement CIB · Edahabia · Virement DZD</p>
         </div>
       </div>
     </footer>
