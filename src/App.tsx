@@ -3,23 +3,14 @@ import {
   Sparkles, 
   Video, 
   Image as ImageIcon, 
-  Layers, 
   Zap, 
-  Globe, 
   CreditCard, 
   ChevronRight, 
   ArrowRight, 
   Play, 
-  Star, 
   CheckCircle2, 
-  Sliders, 
-  Search,
-  Languages,
   Wand2,
-  ShieldCheck,
-  TrendingUp,
-  SlidersHorizontal,
-  ChevronDown
+  ShieldCheck
 } from 'lucide-react';
 
 const AI_MODELS = [
@@ -47,7 +38,6 @@ const PROMPT_TEMPLATES = [
 ];
 
 export default function LandingPage() {
-  const [activeTab, setActiveTab] = useState('all');
   const [selectedModel, setSelectedModel] = useState('Flux 1.1 Pro');
   const [prompt, setPrompt] = useState(PROMPT_TEMPLATES[0]);
   const [aspectRatio, setAspectRatio] = useState('16:9');
