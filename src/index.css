@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[#f1f2f4] text-slate-900 antialiased;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+::selection {
+  @apply bg-slate-900 text-white;
+}
