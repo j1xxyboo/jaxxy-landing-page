@@ -8,8 +8,8 @@ import Footer from './sections/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#f1f2f4] py-6 sm:py-10">
-      <div className="mx-auto max-w-[1360px] overflow-hidden rounded-[28px] bg-white shadow-panel">
+    <div className="min-h-screen bg-ink-950 py-6 sm:py-10">
+      <div className="mx-auto max-w-[1360px] overflow-hidden rounded-[28px] border border-white/[0.06] bg-ink-900 shadow-panel">
         <Navbar />
         <Hero />
         <Studio />
