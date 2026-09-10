@@ -8,24 +8,30 @@ import Pricing from './sections/Pricing';
 import Footer from './sections/Footer';
 import AdminGate from './admin/AdminGate';
 
-function useHashRoute() {
-  const [hash, setHash] = useState(() => window.location.hash);
-
-  useEffect(() => {
-    const onChange = () => setHash(window.location.hash);
-    window.addEventListener('hashchange', onChange);
-    return () => window.removeEventListener('hashchange', onChange);
-  }, []);
-
-  return hash;
+/**
+ * Matches every reasonable way of typing the console URL:
+ * #/admin, #admin, #/admin/, /admin, /admin/ — with or without a trailing slash.
+ */
+function isAdminRoute(): boolean {
+  const hash = window.location.hash.replace(/^#\/?/, '').replace(/\/$/, '');
+  const path = window.location.pathname.replace(/\/$/, '');
+  return hash === 'admin' || path.endsWith('/admin');
 }
 
 export default function App() {
-  const hash = useHashRoute();
+  const [admin, setAdmin] = useState(isAdminRoute);
 
-  if (hash.startsWith('#/admin')) {
-    return <AdminGate />;
-  }
+  useEffect(() => {
+    const sync = () => setAdmin(isAdminRoute());
+    window.addEventListener('hashchange', sync);
+    window.addEventListener('popstate', sync);
+    return () => {
+      window.removeEventListener('hashchange', sync);
+      window.removeEventListener('popstate', sync);
+    };
+  }, []);
+
+  if (admin) return <AdminGate />;
 
   return (
     <div id="top" className="min-h-screen bg-canvas px-3 py-3 sm:px-6 sm:py-6">

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  AlertCircle,
   ArrowLeft,
-  CircleAlert,
   Coins,
   Download,
   Eye,
@@ -37,9 +37,12 @@ function loadJobs(): Job[] {
   try {
     const raw = localStorage.getItem(JOBS_STORAGE);
     const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed)
-      ? parsed.map((job: Job) => (job.status === 'RUNNING' ? { ...job, status: 'FAILED', error: 'Interrompu par un rechargement.' } : job))
-      : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map((job: Job) =>
+      job.status === 'RUNNING'
+        ? { ...job, status: 'FAILED' as const, error: 'Interrompu par un rechargement.' }
+        : job,
+    );
   } catch {
     return [];
   }
@@ -123,7 +126,7 @@ export default function AdminDashboard({ onLock }: AdminDashboardProps) {
           item.uid === uid
             ? {
                 ...item,
-                status: 'COMPLETED',
+                status: 'COMPLETED' as const,
                 taskId: result.taskId,
                 urls: result.urls,
                 credits: result.credits,
@@ -135,7 +138,9 @@ export default function AdminDashboard({ onLock }: AdminDashboardProps) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue.';
       setError(message);
       setJobs((prev) =>
-        prev.map((item) => (item.uid === uid ? { ...item, status: 'FAILED', error: message } : item)),
+        prev.map((item) =>
+          item.uid === uid ? { ...item, status: 'FAILED' as const, error: message } : item,
+        ),
       );
     } finally {
       setBusy(false);
@@ -149,10 +154,12 @@ export default function AdminDashboard({ onLock }: AdminDashboardProps) {
         <header className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-100 px-5 py-4 sm:px-8">
           <div className="flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent">
-              <Sparkles className="h-4.5 w-4.5 text-white" strokeWidth={2.2} />
+              <Sparkles className="h-4 w-4 text-white" strokeWidth={2.2} />
             </span>
             <div>
-              <p className="text-[15px] font-semibold tracking-tight text-inkline">Jaxxy · Console de test</p>
+              <p className="text-[15px] font-semibold tracking-tight text-inkline">
+                Jaxxy · Console de test
+              </p>
               <p className="text-[12px] text-neutral-400">Accès administrateur — non public</p>
             </div>
           </div>
@@ -227,7 +234,9 @@ export default function AdminDashboard({ onLock }: AdminDashboardProps) {
                     </span>
                     <p className="mt-3 text-[13.5px] font-semibold text-inkline">{item.name}</p>
                     <p className="text-[11.5px] text-neutral-400">{item.vendor}</p>
-                    <p className="mt-1.5 text-[11.5px] leading-relaxed text-neutral-500">{item.blurb}</p>
+                    <p className="mt-1.5 text-[11.5px] leading-relaxed text-neutral-500">
+                      {item.blurb}
+                    </p>
                   </button>
                 );
               })}
@@ -246,7 +255,7 @@ export default function AdminDashboard({ onLock }: AdminDashboardProps) {
 
             {error && (
               <p className="flex items-start gap-2 rounded-xl bg-red-50 px-3.5 py-3 text-[12.5px] font-medium leading-relaxed text-red-600">
-                <CircleAlert className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={2.2} /> {error}
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={2.2} /> {error}
               </p>
             )}
 
@@ -258,7 +267,7 @@ export default function AdminDashboard({ onLock }: AdminDashboardProps) {
               {busy ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" strokeWidth={2.4} />
-                  Génération… {elapsed > 0 && `${Math.round(elapsed / 1000)}s`}
+                  Génération… {elapsed > 0 ? `${Math.round(elapsed / 1000)}s` : ''}
                 </>
               ) : (
                 <>
@@ -402,7 +411,7 @@ function JobCard({ job }: { job: Job }) {
         </span>
       </div>
 
-      <p className="px-4 pt-2 text-[12px] leading-relaxed text-neutral-500 line-clamp-3">{job.prompt}</p>
+      <p className="px-4 pt-2 text-[12px] leading-relaxed text-neutral-500">{job.prompt}</p>
 
       <div className="mt-3 px-4">
         {job.status === 'RUNNING' && (
