@@ -1,14 +1,31 @@
-# Jaxxy.ai — Landing Page
+# Jaxxy — Landing Page
 
-The official landing page for **Jaxxy.ai**, Algeria's first AI creative platform. Jaxxy brings together top AI image and video generation models (Seedance, Kling, Nano Banana, GPT Image, MiniMax, Flux) into a single unified interface with local payment options (CIB, Edahabia).
+The official landing page for **Jaxxy**, Algeria's first AI creative platform. Jaxxy brings together top AI image and video generation models (Seedance, Kling, Nano Banana, GPT Image, MiniMax, Flux) into a single unified interface with local payment options (CIB, Edahabia).
 
-## Features
-- **Concentric Orbit Design**: Inspired by Deflexai's modern concentric layout, repurposed for AI creative tool integration.
-- **Model Selector Studio**: Interactive prompt and model switcher for Flux, Kling, Seedance, Nano Banana, MiniMax, and DALL-E 3.
-- **Local DZD Pricing & Payments**: Highlighting CIB, Edahabia, and BaridiMob integrations for Algerian and North African creators.
-- **Multi-lingual Support**: French and Arabic interface toggle built-in.
+## Tech stack
 
-## Tech Stack
 - React + TypeScript
 - Tailwind CSS
-- Lucide React Icons
+- Lucide icons
+- Vite
+
+## Getting started
+
+```bash
+npm install
+cp .env.example .env.local   # then fill in the real values
+npm run dev
+```
+
+## Admin test console
+
+A generation console for internal testing lives at **`/#/admin`**. It is not linked from the site.
+
+- Unlocked with `VITE_ADMIN_PASSCODE` (defaults to `jaxxy-admin`). This is a client-side gate meant for local testing — it is **not** real access control. Anything deployed publicly needs server-side auth.
+- Models wired up: **Seedance 2.5** (video, submit + poll) and **GPT Image 2.5** (image, sync execute), both through the Picsart workflows gateway.
+- The Picsart API key comes from `VITE_PICSART_API_KEY` or can be pasted into the console (stored in `localStorage`). Never commit a live key — `.env.local` is git-ignored.
+- In dev, requests are proxied through Vite (`/picsart` → `https://api.picsart.com`) to avoid CORS. For production, route the calls through your own backend so the key never reaches the browser.
+
+### Adding a model
+
+Append an entry to `ADMIN_MODELS` in `src/admin/models.ts` with its gateway id, kind, whether it needs async submit/poll, and its parameter fields. The form and result cards render themselves from that definition.
