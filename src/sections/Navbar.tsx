@@ -1,44 +1,37 @@
-import { ChevronDown, Monitor, MessageCircle } from 'lucide-react';
+import Logo from '../components/Logo';
+
+const LINKS = [
+  { label: 'Modèles', href: '#modeles' },
+  { label: 'Fonctionnalités', href: '#fonctionnalites' },
+  { label: 'Entreprises', href: '#entreprises' },
+  { label: 'Tarifs', href: '#tarifs' },
+];
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-ink-950/80 backdrop-blur-xl">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <div className="flex items-center gap-8">
-          <a href="#" className="flex items-center gap-2.5">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500" />
-            <span className="text-lg font-bold tracking-tight text-white">Logo</span>
-          </a>
-          <div className="hidden items-center gap-6 md:flex">
-            <button className="flex items-center gap-1 text-sm font-medium text-white/60 transition hover:text-white">
-              Use Cases <ChevronDown className="h-4 w-4" />
-            </button>
-            <a href="#" className="text-sm font-medium text-white/60 transition hover:text-white">
-              Explore
-            </a>
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl">
+      <nav className="flex h-[72px] items-center justify-between px-5 sm:px-10">
+        <Logo />
+        <div className="hidden items-center gap-9 md:flex">
+          {LINKS.map((link) => (
             <a
-              href="#"
-              className="flex items-center gap-1.5 text-sm font-medium text-white/60 transition hover:text-white"
+              key={link.label}
+              href={link.href}
+              className="text-[14.5px] font-medium text-neutral-600 transition hover:text-inkline"
             >
-              <Monitor className="h-4 w-4" /> Install
+              {link.label}
             </a>
-            <a
-              href="#"
-              className="flex items-center gap-1.5 text-sm font-medium text-white/60 transition hover:text-white"
-            >
-              <MessageCircle className="h-4 w-4" /> Community
-            </a>
-          </div>
+          ))}
         </div>
-        <div className="flex items-center gap-3">
-          <a href="#" className="hidden text-sm font-medium text-white/60 transition hover:text-white sm:block">
-            Log in
+        <div className="flex items-center gap-4">
+          <a href="#" className="hidden text-[14.5px] font-medium text-inkline sm:block">
+            Se connecter
           </a>
           <a
             href="#"
-            className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-white/90"
+            className="rounded-xl border border-neutral-200 bg-white px-5 py-2.5 text-[14.5px] font-semibold text-inkline shadow-sm transition hover:border-neutral-300"
           >
-            Sign up
+            Essayer Jaxxy
           </a>
         </div>
       </nav>

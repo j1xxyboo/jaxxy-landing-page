@@ -5,23 +5,24 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        hand: ['Caveat', 'cursive'],
       },
       letterSpacing: {
         tightest: '-0.045em',
       },
       colors: {
-        ink: {
-          950: '#050507',
-          900: '#0a0a10',
-          850: '#0e0e15',
-          800: '#13131c',
+        canvas: '#dcdcd9',
+        panel: '#f4f4f1',
+        inkline: '#111114',
+        accent: {
+          DEFAULT: '#2f6bff',
+          dark: '#1f56e0',
         },
       },
       boxShadow: {
-        badge: '0 8px 24px -8px rgba(0, 0, 0, 0.55)',
-        card: '0 24px 60px -30px rgba(0, 0, 0, 0.7)',
-        panel: '0 40px 120px -60px rgba(0, 0, 0, 0.9)',
-        glow: '0 0 50px -12px rgba(99, 102, 241, 0.4)',
+        tile: '0 12px 30px -14px rgba(15, 15, 20, 0.25)',
+        card: '0 24px 50px -24px rgba(15, 15, 20, 0.28)',
+        frame: '0 40px 90px -50px rgba(15, 15, 20, 0.4)',
       },
       keyframes: {
         floaty: {

@@ -37,13 +37,13 @@ const PLANS = [
 
 export default function Pricing() {
   return (
-    <section id="tarifs" className="border-t border-white/[0.06] px-4 py-20 sm:px-6">
+    <section id="tarifs" className="px-5 pb-28 sm:px-10">
       <div className="mx-auto max-w-5xl">
         <div className="mx-auto max-w-xl text-center">
-          <h2 className="text-[28px] font-bold tracking-tight text-white sm:text-[34px]">
+          <h2 className="text-[28px] font-semibold tracking-tight text-inkline sm:text-[34px]">
             Des crédits, pas des abonnements imposés
           </h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
+          <p className="mt-3 text-[15px] leading-relaxed text-neutral-500">
             Les crédits se consomment selon le modèle utilisé. Rechargez quand vous en avez besoin.
           </p>
         </div>
@@ -54,36 +54,36 @@ export default function Pricing() {
               key={plan.name}
               className={`flex flex-col rounded-3xl border p-6 ${
                 plan.featured
-                  ? 'border-indigo-400/40 bg-gradient-to-b from-indigo-500/[0.14] via-ink-850 to-ink-850 shadow-glow'
-                  : 'border-white/[0.08] bg-ink-850'
+                  ? 'border-accent/40 bg-white shadow-card ring-1 ring-accent/20'
+                  : 'border-neutral-200 bg-white shadow-sm'
               }`}
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-[15px] font-semibold text-white">{plan.name}</h3>
+                <h3 className="text-[15px] font-semibold text-inkline">{plan.name}</h3>
                 {plan.featured && (
-                  <span className="rounded-full bg-indigo-500/20 px-2.5 py-1 text-[11px] font-semibold text-indigo-300">
+                  <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-semibold text-accent">
                     Populaire
                   </span>
                 )}
               </div>
 
-              <div className="mt-5 flex items-baseline gap-1.5 text-white">
+              <div className="mt-5 flex items-baseline gap-1.5 text-inkline">
                 <span className="text-[34px] font-bold tracking-tight">{plan.price}</span>
-                <span className="text-[14px] font-semibold text-slate-400">DA</span>
+                <span className="text-[14px] font-semibold text-neutral-400">DA</span>
               </div>
-              <p className={`mt-1 text-[13px] font-semibold ${plan.featured ? 'text-indigo-200' : 'text-slate-200'}`}>
+              <p className={`mt-1 text-[13px] font-semibold ${plan.featured ? 'text-accent' : 'text-neutral-700'}`}>
                 {plan.credits}
               </p>
-              <p className="text-[12px] text-slate-500">{plan.note}</p>
+              <p className="text-[12px] text-neutral-400">{plan.note}</p>
 
               <ul className="mt-6 space-y-2.5">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-[13px]">
                     <Check
-                      className={`mt-0.5 h-4 w-4 shrink-0 ${plan.featured ? 'text-indigo-400' : 'text-slate-300'}`}
+                      className={`mt-0.5 h-4 w-4 shrink-0 ${plan.featured ? 'text-accent' : 'text-neutral-400'}`}
                       strokeWidth={2.4}
                     />
-                    <span className="text-slate-300">{feature}</span>
+                    <span className="text-neutral-600">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -91,8 +91,8 @@ export default function Pricing() {
               <button
                 className={`mt-7 rounded-xl px-4 py-2.5 text-[13px] font-semibold transition-colors ${
                   plan.featured
-                    ? 'bg-white text-slate-900 hover:bg-slate-200'
-                    : 'border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08]'
+                    ? 'bg-accent text-white hover:bg-accent-dark'
+                    : 'border border-neutral-200 bg-white text-inkline hover:border-neutral-300'
                 }`}
               >
                 {plan.cta}
