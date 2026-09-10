@@ -1,24 +1,21 @@
 export type ModelKind = 'image' | 'video';
-export type MarkShape =
-  | 'spark'
-  | 'flower'
-  | 'wave'
-  | 'play'
-  | 'grid'
-  | 'hex'
-  | 'ring'
-  | 'prism';
+
+export type BrandId =
+  | 'flux'
+  | 'kling'
+  | 'seedance'
+  | 'nano-banana'
+  | 'gpt-image'
+  | 'minimax'
+  | 'runway'
+  | 'ideogram';
 
 export interface AiModel {
-  id: string;
+  id: BrandId;
   name: string;
   kind: ModelKind;
-  shape: MarkShape;
-  tone: string;
   summary: string;
   credits: number;
-  /** Orbit placement on large screens, in percent of the hero box. */
-  orbit: { top: string; left: string };
 }
 
 export const MODELS: AiModel[] = [
@@ -26,93 +23,58 @@ export const MODELS: AiModel[] = [
     id: 'flux',
     name: 'Flux 1.1 Pro',
     kind: 'image',
-    shape: 'spark',
-    tone: '#fbbf24',
     summary: 'Photographie publicitaire et rendus produit très nets.',
     credits: 3,
-    orbit: { top: '16%', left: '22%' },
   },
   {
     id: 'kling',
     name: 'Kling 1.6',
     kind: 'video',
-    shape: 'play',
-    tone: '#60a5fa',
     summary: 'Vidéo fluide jusqu’à 10 s, mouvements de caméra maîtrisés.',
     credits: 18,
-    orbit: { top: '30%', left: '11%' },
   },
   {
     id: 'seedance',
     name: 'Seedance 2.0',
     kind: 'video',
-    shape: 'wave',
-    tone: '#2dd4bf',
     summary: 'Clips courts et dynamiques pensés pour les réseaux.',
     credits: 14,
-    orbit: { top: '52%', left: '7%' },
   },
   {
     id: 'nano-banana',
     name: 'Nano Banana',
     kind: 'image',
-    shape: 'ring',
-    tone: '#facc15',
     summary: 'Retouche et variations en quelques secondes.',
     credits: 2,
-    orbit: { top: '73%', left: '17%' },
   },
   {
     id: 'gpt-image',
     name: 'GPT Image',
     kind: 'image',
-    shape: 'flower',
-    tone: '#34d399',
     summary: 'Compréhension fine des prompts longs et du texte affiché.',
     credits: 4,
-    orbit: { top: '16%', left: '76%' },
   },
   {
     id: 'minimax',
     name: 'MiniMax Hailuo',
     kind: 'video',
-    shape: 'prism',
-    tone: '#a78bfa',
     summary: 'Rendu cinématographique, idéal pour les spots de marque.',
     credits: 16,
-    orbit: { top: '32%', left: '87%' },
   },
   {
     id: 'runway',
     name: 'Runway Gen-3',
     kind: 'video',
-    shape: 'hex',
-    tone: '#e2e8f0',
     summary: 'Image-vers-vidéo et effets visuels avancés.',
     credits: 20,
-    orbit: { top: '55%', left: '90%' },
   },
   {
     id: 'ideogram',
     name: 'Ideogram 3.0',
     kind: 'image',
-    shape: 'grid',
-    tone: '#fb7185',
     summary: 'Typographie et logos lisibles en arabe comme en latin.',
     credits: 3,
-    orbit: { top: '74%', left: '80%' },
   },
-];
-
-export const PROVIDER_WORDMARKS = [
-  'Flux',
-  'Kling',
-  'Seedance',
-  'Nano Banana',
-  'GPT Image',
-  'MiniMax',
-  'Runway',
-  'Ideogram',
 ];
 
 export const PROMPT_SAMPLES = [

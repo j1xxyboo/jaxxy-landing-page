@@ -1,88 +1,66 @@
-import type { MarkShape } from '../data/models';
+import type { BrandId } from '../data/models';
 
 interface ModelMarkProps {
-  shape: MarkShape;
-  tone: string;
+  brand: BrandId;
   size?: number;
 }
 
-export default function ModelMark({ shape, tone, size = 22 }: ModelMarkProps) {
-  const common = {
-    width: size,
-    height: size,
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    xmlns: 'http://www.w3.org/2000/svg',
-  };
+const BRANDS: Record<BrandId, { bg: string; label: string }> = {
+  flux: { bg: '#2b2f36', label: 'F' },
+  kling: { bg: '#6d5efc', label: 'K' },
+  seedance: { bg: '#325ab4', label: 'S' },
+  'nano-banana': { bg: '#1a73e8', label: '' },
+  'gpt-image': { bg: '#10a37f', label: '' },
+  minimax: { bg: '#f04438', label: 'M' },
+  runway: { bg: '#0a0a0a', label: 'R' },
+  ideogram: { bg: '#ff4f8b', label: 'I' },
+};
 
-  switch (shape) {
-    case 'spark':
-      return (
-        <svg {...common} aria-hidden="true">
-          <path d="M12 2.5 13.9 9 20.5 11 13.9 13 12 21.5 10.1 13 3.5 11 10.1 9 12 2.5Z" fill={tone} />
-        </svg>
-      );
-    case 'play':
-      return (
-        <svg {...common} aria-hidden="true">
-          <rect x="2.5" y="5" width="19" height="14" rx="4" fill={tone} opacity="0.16" />
-          <path d="M10 8.8 16 12l-6 3.2V8.8Z" fill={tone} />
-        </svg>
-      );
-    case 'wave':
-      return (
-        <svg {...common} aria-hidden="true">
-          <path
-            d="M3 15c2.4 0 2.4-6 4.8-6s2.4 6 4.8 6 2.4-6 4.8-6S19.8 15 22 15"
-            stroke={tone}
-            strokeWidth="2.2"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
-    case 'ring':
-      return (
-        <svg {...common} aria-hidden="true">
-          <circle cx="12" cy="12" r="8.5" stroke={tone} strokeWidth="2.2" />
-          <circle cx="12" cy="12" r="3" fill={tone} />
-        </svg>
-      );
-    case 'flower':
-      return (
-        <svg {...common} aria-hidden="true">
-          <circle cx="12" cy="6.4" r="3.4" fill={tone} opacity="0.9" />
-          <circle cx="17" cy="14.4" r="3.4" fill={tone} opacity="0.55" />
-          <circle cx="7" cy="14.4" r="3.4" fill={tone} opacity="0.75" />
-        </svg>
-      );
-    case 'prism':
-      return (
-        <svg {...common} aria-hidden="true">
-          <path d="M12 3.2 21 18H3l9-14.8Z" fill={tone} opacity="0.85" />
-          <path d="M12 3.2 21 18h-9V3.2Z" fill={tone} opacity="0.45" />
-        </svg>
-      );
-    case 'hex':
-      return (
-        <svg {...common} aria-hidden="true">
-          <path
-            d="M12 2.8l8 4.6v9.2l-8 4.6-8-4.6V7.4l8-4.6Z"
-            stroke={tone}
-            strokeWidth="2"
-            fill={tone}
-            fillOpacity="0.12"
-          />
-        </svg>
-      );
-    case 'grid':
-    default:
-      return (
-        <svg {...common} aria-hidden="true">
-          <rect x="3.5" y="3.5" width="7" height="7" rx="2" fill={tone} />
-          <rect x="13.5" y="3.5" width="7" height="7" rx="2" fill={tone} opacity="0.45" />
-          <rect x="3.5" y="13.5" width="7" height="7" rx="2" fill={tone} opacity="0.45" />
-          <rect x="13.5" y="13.5" width="7" height="7" rx="2" fill={tone} />
-        </svg>
-      );
-  }
+/** Brand mark for each AI model, drawn as a real vector tile (no emoji fallbacks). */
+export default function ModelMark({ brand, size = 40 }: ModelMarkProps) {
+  const { bg, label } = BRANDS[brand];
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect width="40" height="40" rx="11" fill={bg} />
+
+      {brand === 'nano-banana' && (
+        <path
+          d="M20 8.5c1.6 4.7 3.4 6.5 8 8-4.6 1.5-6.4 3.3-8 8-1.6-4.7-3.4-6.5-8-8 4.6-1.5 6.4-3.3 8-8Z"
+          fill="#ffffff"
+        />
+      )}
+
+      {brand === 'gpt-image' && (
+        <g stroke="#ffffff" strokeWidth="1.9" fill="none">
+          <ellipse cx="20" cy="20" rx="4.3" ry="9" />
+          <ellipse cx="20" cy="20" rx="4.3" ry="9" transform="rotate(60 20 20)" />
+          <ellipse cx="20" cy="20" rx="4.3" ry="9" transform="rotate(120 20 20)" />
+        </g>
+      )}
+
+      {label && (
+        <text
+          x="20"
+          y="20.5"
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontFamily="Inter, ui-sans-serif, sans-serif"
+          fontSize="17"
+          fontWeight="800"
+          letterSpacing="-0.5"
+          fill="#ffffff"
+        >
+          {label}
+        </text>
+      )}
+    </svg>
+  );
 }
